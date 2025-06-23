@@ -8,6 +8,7 @@ import { UpdateJogoDto } from './dto/update-jogo.dto';
 
 @Injectable()
 export class JogosService {
+  
   constructor(
     @InjectRepository(Jogo)
     private readonly jogoRepository: Repository<Jogo>,
@@ -50,6 +51,18 @@ export class JogosService {
       const jogoAtualizado = await this.jogoRepository.findOneBy ({ id });
       return jogoAtualizado;
   }
+  
+  
+  async removeAll(): Promise<{message: string}> {
+    const jogos = await this.jogoRepository.find();
+
+    if (jogos.length === 0 ){
+      return {message: 'Não há jogos para remover!'}
+    }
+
+    await this.jogoRepository.clear();
+    return { message: 'Todos os jogos foram removidos com sucesso!' };
+    } 
 
 
   async remove(id: number){

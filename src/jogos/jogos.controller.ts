@@ -11,12 +11,13 @@ export class JogosController {
 
   
   @Post()
-  @UsePipes(new ValidationPipe({whitelist: true}))
-  create(@Body() createJogoDto: CreateJogoDto) {
-    return this.jogosService.create(createJogoDto);
+  @UsePipes(new ValidationPipe({ whitelist: true }))
+  create(
+    @Body() createJogoDto: CreateJogoDto){
+    return this.jogosService.create(createJogoDto)
   }
 
-
+  
   @Get()
   @UsePipes(new ValidationPipe({whitelist: true}))
   findAll() {
@@ -35,6 +36,12 @@ export class JogosController {
   @UsePipes(new ValidationPipe({whitelist: true}))
   update(@Param('id') id: number, @Body() updateJogoDto: UpdateJogoDto) {
     return this.jogosService.update(id, updateJogoDto);
+  }
+
+  @Delete()
+  @UsePipes(new ValidationPipe({whitelist: true}))
+  removeAll() {
+    return this.jogosService.removeAll();
   }
 
 
